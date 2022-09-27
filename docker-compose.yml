@@ -1,0 +1,54 @@
+version: "3.5"
+
+x-logging: &logging
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+      max-file: "3"
+      tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+    
+
+services:
+    tx_listener:
+        container_name: tlistener
+        image: bl4ck5un/listener:0.1
+        command: "--mode tx_sub --interval 0 --debug"
+        environment:
+            MONITOR_ID: "${MONITOR_ID}"
+            POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
+            WEB3_PROVIDER_URL: "${WS_WEB3_PROVIDER_URL}"
+        networks: 
+            - eth-docker_default
+        restart: unless-stopped
+        <<: *logging
+    
+    block_listener:
+        container_name: blistener
+        image: bl4ck5un/listener:0.1
+        command: "--mode block --interval 1"
+        environment:
+            MONITOR_ID: "${MONITOR_ID}"
+            POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
+            WEB3_PROVIDER_URL: "${HTTP_WEB3_PROVIDER_URL}"
+        networks: 
+            - eth-docker_default
+        restart: unless-stopped
+        <<: *logging
+
+    tx_dumper:
+        container_name: txdumper
+        image: bl4ck5un/listener:0.1
+        command: "--mode fulltx --interval 1"
+        environment:
+            MONITOR_ID: "${MONITOR_ID}"
+            POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
+            WEB3_PROVIDER_URL: "${HTTP_WEB3_PROVIDER_URL}"
+        networks: 
+            - eth-docker_default
+        restart: unless-stopped
+        <<: *logging
+
+networks:
+  eth-docker_default:
+    external: true 

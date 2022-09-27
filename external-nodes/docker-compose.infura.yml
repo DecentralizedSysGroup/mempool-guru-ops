@@ -1,0 +1,58 @@
+version: "3.5"
+
+x-logging: &logging
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+      max-file: "3"
+      tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+
+services:
+    tx_listener_quicknode:
+        container_name: tlistener-quicknode
+        image: bl4ck5un/listener:0.1
+        command: "--mode tx --interval 0.1"
+        environment:
+            MONITOR_ID: "QuickNode"
+            POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
+            WEB3_PROVIDER_URL: "${QUICKNODE_WSS_URL}"
+        network_mode: host
+        restart: unless-stopped
+        <<: *logging
+
+    tx_listener_infura:
+        container_name: tlistener-infura
+        image: bl4ck5un/listener:0.1
+        command: "--mode tx_sub --interval .01"
+        environment:
+            MONITOR_ID: "Infura"
+            POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
+            WEB3_PROVIDER_URL: "${INFURA_WSS_URL}"
+        network_mode: host
+        restart: unless-stopped
+        <<: *logging
+
+    blistener_quicknode:
+        container_name: blistener-qn
+        image: bl4ck5un/listener:0.1
+        command: "--mode block --interval 1"
+        environment:
+            MONITOR_ID: "QuickNode"
+            POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
+            WEB3_PROVIDER_URL: "${QUICKNODE_WSS_URL}"
+        network_mode: host
+        restart: unless-stopped
+        <<: *logging
+
+    blistener_infura:
+        container_name: blistener-infura
+        image: bl4ck5un/listener:0.1
+        command: "--mode block --interval 1"
+        environment:
+            MONITOR_ID: "Infura"
+            POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
+            WEB3_PROVIDER_URL: "${INFURA_WSS_URL}"
+        network_mode: host
+        restart: unless-stopped
+        <<: *logging
