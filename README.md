@@ -19,7 +19,7 @@ Currently we have 6 MMNs deployed cross the globe. Each MMN runs a geth client a
 
 ### Dashboard
 
-We built a dashboard that display the data in interesting ways in real-time. It's running at http://147.135.6.228:5000/. Currently it only shows private transactions (those bypass the mempool) and the confirmation latency (how long a given transaction waited in the mempool before included in a block).
+We built a dashboard at http://mempool.guru.
 
 ## Deploy an MMN
 
