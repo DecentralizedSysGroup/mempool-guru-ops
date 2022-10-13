@@ -12,7 +12,7 @@ x-logging: &logging
 services:
     tx_listener:
         container_name: tlistener
-        image: bl4ck5un/listener:0.1
+        image: bl4ck5un/listener:0.1.1
         command: "--mode tx_sub --interval 0 --debug"
         environment:
             MONITOR_ID: "${MONITOR_ID}"
@@ -25,7 +25,7 @@ services:
     
     block_listener:
         container_name: blistener
-        image: bl4ck5un/listener:0.1
+        image: bl4ck5un/listener:0.1.1
         command: "--mode block --interval 1"
         environment:
             MONITOR_ID: "${MONITOR_ID}"
@@ -38,7 +38,7 @@ services:
 
     tx_dumper:
         container_name: txdumper
-        image: bl4ck5un/listener:0.1
+        image: bl4ck5un/listener:0.1.1
         command: "--mode fulltx --interval 1"
         environment:
             MONITOR_ID: "${MONITOR_ID}"
