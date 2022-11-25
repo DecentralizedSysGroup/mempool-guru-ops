@@ -72,6 +72,13 @@ You can check logs of these containers using, e.g., `docker logs -f tlistener`. 
 - Attach to geth console: `docker exec -it eth-docker-execution-1 geth attach`
 
 
+## Upgrade to a newer version
+
+```
+git pull
+docker compose up -d
+```
+
 ## TODO
 
 Many.
