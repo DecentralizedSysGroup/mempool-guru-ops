@@ -11,8 +11,8 @@ x-logging: &logging
 services:
     tx_listener_quicknode:
         container_name: tlistener-quicknode
-        image: bl4ck5un/listener:0.1
-        command: "--mode tx --interval 0.1"
+        image: bl4ck5un/listener:0.2
+        command: "--mode tx_sub --interval .01"
         environment:
             MONITOR_ID: "QuickNode"
             POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
@@ -23,7 +23,7 @@ services:
 
     tx_listener_infura:
         container_name: tlistener-infura
-        image: bl4ck5un/listener:0.1
+        image: bl4ck5un/listener:0.2
         command: "--mode tx_sub --interval .01"
         environment:
             MONITOR_ID: "Infura"
@@ -35,7 +35,7 @@ services:
 
     blistener_quicknode:
         container_name: blistener-qn
-        image: bl4ck5un/listener:0.1
+        image: bl4ck5un/listener:0.2
         command: "--mode block --interval 1"
         environment:
             MONITOR_ID: "QuickNode"
@@ -47,7 +47,7 @@ services:
 
     blistener_infura:
         container_name: blistener-infura
-        image: bl4ck5un/listener:0.1
+        image: bl4ck5un/listener:0.2
         command: "--mode block --interval 1"
         environment:
             MONITOR_ID: "Infura"
