@@ -12,7 +12,7 @@ services:
     tx_listener_quicknode:
         container_name: tlistener-quicknode
         image: bl4ck5un/listener:0.2
-        command: "--mode tx_sub --interval .01"
+        command: "--mode tx_sub --interval .1"
         environment:
             MONITOR_ID: "QuickNode"
             POSTGRES_DB_URL: "${POSTGRES_DB_URL}"
