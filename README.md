@@ -35,7 +35,7 @@ cd eth-docker
 curl https://gist.githubusercontent.com/bl4ck5un/ce5205f50a93e122fe1fc6c4517064a4/raw/70cdb31b312c69ac480ab55e73cc32599755053d/geth.diff | git apply -v
 
 # Option 1: download config
-wget https://gist.githubusercontent.com/bl4ck5un/26a32f4634ecfbd9919338e9cdd36f16/raw/277c025dc35039adb412c5d439d78905f6c77f4b/eth-docker.env -o .env
+curl https://gist.githubusercontent.com/bl4ck5un/26a32f4634ecfbd9919338e9cdd36f16/raw/277c025dc35039adb412c5d439d78905f6c77f4b/eth-docker.env -o .env
 
 # Option 2: configure the full node: **please choose geth as the execution client**.
 ./ethd config
