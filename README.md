@@ -70,12 +70,31 @@ This will start three docker containers
 You can check logs of these containers using, e.g., `docker logs -f tlistener`. Similarly, you can check the logs of `txdump` and `blistener`.
 
 
-### Some useful commands
+## Some useful commands
 
-- Attach to geth console: `docker exec -it eth-docker-execution-1 geth attach`
+#### Attach to geth console
 
+```
+docker exec -it eth-docker-execution-1 geth attach
+```
 
-## Upgrade to a newer version
+#### [Prune geth storage](https://eth-docker.net/Support/GethPrune) 
+
+```
+./ethd prune-geth
+```
+
+#### Upgrade eth-docker
+
+```
+git stash # since we changed geth.yml, we need to stash the changes before pulling
+git pull
+git stash pop
+./ethd update
+./ethd up
+```
+
+#### Upgrade mempool-guru
 
 ```
 git pull
