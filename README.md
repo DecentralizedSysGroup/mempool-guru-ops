@@ -78,6 +78,12 @@ You can check logs of these containers using, e.g., `docker logs -f tlistener`. 
 docker exec -it eth-docker-execution-1 geth attach
 ```
 
+#### Print logs
+
+- tx listener: `docker logs -f tlistener`
+- block listener: `docker logs -f blistener`
+- geth: `docker logs -f eth-docker-execution-1` 
+
 #### [Prune geth storage](https://eth-docker.net/Support/GethPrune) 
 
 ```
